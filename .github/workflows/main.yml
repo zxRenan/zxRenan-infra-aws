@@ -32,6 +32,6 @@ jobs:
       - name: terraform-apply
         uses: dflook/terraform-apply@v1.29.1
         with:
-          path: ./main.tf
+          path: main.tf
       
 
