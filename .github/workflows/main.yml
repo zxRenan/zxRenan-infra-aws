@@ -2,13 +2,18 @@ name: terraform
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   Terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
+    environment: production
 
     defaults:
       run:
@@ -16,14 +21,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v2
 
-      - name: "Configure AWS Credentials"
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-           AWS Access Key ID: ${{ secrets.AWS_ACCESS_KEY}}
-           AWS Secret Access Key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-           aws-region: us-east-1
-        
-    
-    
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
