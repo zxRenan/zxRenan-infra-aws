@@ -1,0 +1,28 @@
+name: terraform
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  Terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: "Configure AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+           AWS Access Key ID: ${{ secrets.AWS_ACCESS_KEY}}
+           AWS Secret Access Key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        
+    
+    
